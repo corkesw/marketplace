@@ -1,38 +1,13 @@
 import React from 'react';
-import styled from 'styled-components'
+import './Nav.css';
+import styled from 'styled-components';
+import {Link} from 'react-router-dom'
+
 
 const StyledNav = styled.nav`
 z-index: 2;
 grid-area: header;
-
-
-,
-.nav-text{
-    font-size: 0.6rem;
-}
-${navVisible}
 `;
-
-const navT = {
-    "background-color": "red",
-    "position": "absolute",
-    "width": "50vw",
-    "height": "100vh",
-    "top": "10vh"
-    // left: -50vw;
-
-}
-
-const navF = {
-    
-        "background-color": "blue",
-        "position": "absolute",
-        "width": "50vw",
-        "height": "100vh",
-        "top": "10vh",
-        // left: -25vw;
-        // overflow: hidden;
-}
 
 
 const Nav = ({navVisible, setNavVisible}) => {
@@ -44,12 +19,11 @@ const Nav = ({navVisible, setNavVisible}) => {
 
     return (
 
-        <StyledNav className={navVisible? 'navVis' : 'navHidden'}>
+        <StyledNav className={navVisible? 'nav-vis' : 'nav-hidden'}>
             <ul className="nav-text">
-                <li><button onClick={setNavVisible('navT')}>X</button></li>
-                <li><button onClick={setNavVisible('navF')}>Y</button></li>
+                <li><button onClick={()=>{setNavVisible(false)}}>X</button></li>
                 <li>Home</li>
-                <li>Categories</li>
+                <li><Link to='/categories'>Categories</Link></li>
                 <li>Basket</li>
                 <li>My Orders</li>
                 <li>Sell an item</li>
