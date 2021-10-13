@@ -1,38 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import {BrowserRouter, Switch, Route} from "react-router-dom"
-import Header from './Constants/Header';
-import Nav from './Constants/Nav';
-import Search from './Constants/Search';
-import Homepage from './Pages/Homepage';
-import styled from 'styled-components';
+import { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Header from "./Constants/Header";
+import Nav from "./Constants/Nav";
+import Search from "./Constants/Search";
+import Homepage from "./Pages/Homepage";
+import styled from "styled-components";
 
 const AppLayout = styled.body`
-  display:grid;
+  z-index: 1;
+  display: grid;
   grid-template-columns: 25vw 25vw 25vw 25vw;
   grid-template-rows: 20vh 20vh 60vh;
   grid-template-areas:
     "header header header header"
-    "nav search search search"
-    "nav switch switch switch"
+    "search search search search"
+    "switch switch switch switch";
 `;
 
-
+const StyledSwitch = styled.section`
+  grid-area: switch;
+`;
 
 function App() {
+  const [navVisible, setNavVisible] = useState("navF");
+
   return (
     <AppLayout>
-    <BrowserRouter>
-      <Header className="header"/>
-      <Nav />
-      <Search />
-      <Switch>
-        <Route exact path="/">
-          <Homepage />
-        </Route>
-      </Switch>
-    
-    </BrowserRouter>
+      <BrowserRouter>
+        <Header className="header" />
+        <Nav navVisible={navVisible} setNavVisible={setNavVisible} />
+        <Search />
+        <StyledSwitch>
+          <Switch>
+            <Route exact path="/">
+              <Homepage />
+            </Route>
+          </Switch>
+        </StyledSwitch>
+      </BrowserRouter>
     </AppLayout>
   );
 }
