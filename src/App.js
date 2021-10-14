@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./Constants/Header";
@@ -10,6 +10,9 @@ import Categories from "./Pages/Categories";
 import QueriedItems from "./Pages/QueriedItems";
 import { UserContext } from "./Constants/UserContext";
 import Account from "./Pages/Account";
+import axios from "axios";
+import Basket from "./Pages/Basket";
+
 const AppLayout = styled.div`
   z-index: 1;
   display: grid;
@@ -28,9 +31,21 @@ const StyledSwitch = styled.section`
 function App() {
   const [navVisible, setNavVisible] = useState(false);
   const [user, setUser] = useState(null);
+  const [basket, setBasket] = useState([])
+
+  useEffect(()=> {
+    axios({
+      method: "get",
+      url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`
+    }).then((res) => {
+      console.log(res, 'basket', user)
+      setBasket(res.data.items)
+    })
+  }, [user])
+
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, basket, setBasket }}>
       <AppLayout>
         <BrowserRouter>
           <Header className="header" />
@@ -49,6 +64,9 @@ function App() {
               </Route>
               <Route exact path="/account">
                 <Account />
+              </Route>
+              <Route exact path="/basket">
+                <Basket />
               </Route>
             </Switch>
           </StyledSwitch>

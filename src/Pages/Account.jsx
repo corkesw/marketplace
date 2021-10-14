@@ -54,15 +54,19 @@ const Account = () => {
       >
         <select
           id="user-select"
+          value={selectedUser}
           onChange={(e) => {
             setSelectedUser(e.target.value);
           }}
         >
+          <option value="" disabled selected>Select User</option>
           {userList.map((user) => {
             return (
+             
               <option key={user.username + Math.random()} value={user.username}>
                 {user.username}
               </option>
+            
             );
           })}
         </select>
