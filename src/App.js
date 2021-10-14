@@ -26,14 +26,13 @@ const StyledSwitch = styled.section`
 
 function App() {
   const [navVisible, setNavVisible] = useState(false);
-  
 
   return (
     <AppLayout>
       <BrowserRouter>
         <Header className="header" />
         <Nav navVisible={navVisible} setNavVisible={setNavVisible} />
-        <Search setNavVisible={setNavVisible}/>
+        <Search setNavVisible={setNavVisible} />
         <StyledSwitch>
           <Switch>
             <Route exact path="/">
@@ -42,7 +41,7 @@ function App() {
             <Route exact path="/categories">
               <Categories />
             </Route>
-            <Route exact path="/categories/:category">
+            <Route exact path="/items/:searchTerm">
               <QueriedItems />
             </Route>
           </Switch>

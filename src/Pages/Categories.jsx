@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 
 
@@ -22,7 +23,7 @@ const Categories = () => {
         <section>
             <ul>
                 {categories.map((category) => {
-                    return <li key={category.category_name}>{category.category_name}</li>
+                    return <li key={category.category_name}><Link to={`/items/category-name=${category.category_name}`}>{category.category_name}</Link></li>
                 })}
             </ul>
 
