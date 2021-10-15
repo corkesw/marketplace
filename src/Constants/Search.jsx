@@ -6,6 +6,12 @@ import { Link, useHistory } from "react-router-dom";
 const StyledSearch = styled.form`
   grid-area: search;
   width: 100%;
+  display: grid;
+  grid-template-areas: "menu bar button" ;
+  height: 3rem;
+  width: 90vw;
+  margin: 0 auto;
+  background-color: #53A548;
 `;
 
 const Search = ({ setNavVisible }) => {

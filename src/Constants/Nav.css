@@ -3,7 +3,7 @@
     position: absolute;
     width: 50vw;
     height: 100vh;
-    top: 10vh;
+    top: 20vh;
 }
 
 .nav-hidden {
@@ -19,4 +19,14 @@
 
 .nav-text{
     font-size: 0.6rem;
+    list-style: none;
+    width: 100%;
+}
+
+ul button {
+    width: 100%;
+    left: 0px;
+    margin-left: -2.5rem;
+    height: 2rem;
+    margin-bottom: 0.2rem;
 }

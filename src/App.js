@@ -17,15 +17,18 @@ const AppLayout = styled.div`
   z-index: 1;
   display: grid;
   grid-template-columns: 25vw 25vw 25vw 25vw;
-  grid-template-rows: 20vh 20vh 60vh;
+  grid-template-rows: 20vh 7vh 1fr;
   grid-template-areas:
     "header header header header"
     "search search search search"
     "switch switch switch switch";
+  min-height: 100vh;
 `;
 
 const StyledSwitch = styled.section`
   grid-area: switch;
+  background-color: #53A548;
+  /* min-height: 100%; */
 `;
 
 function App() {

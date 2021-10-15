@@ -5,7 +5,13 @@ import { UserContext } from './UserContext';
 
 
 const StyledHeader = styled.header`
-    grid-area:header
+    grid-area:header;
+    background-color: #19381F;
+    color: white;
+    text-align: center;
+    /* align-self: center; */
+    padding-top: 4rem;
+    height: 100%;
 `;
 
 const Header = () => {

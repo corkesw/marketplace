@@ -8,6 +8,8 @@ import { useHistory } from 'react-router';
 const StyledNav = styled.nav`
 z-index: 2;
 grid-area: header;
+background-color: #55828B;
+
 `;
 
 
