@@ -12,6 +12,7 @@ import { UserContext } from "./Constants/UserContext";
 import Account from "./Pages/Account";
 import axios from "axios";
 import Basket from "./Pages/Basket";
+import ItemView from "./Pages/ItemView";
 
 const AppLayout = styled.div`
   z-index: 1;
@@ -27,28 +28,31 @@ const AppLayout = styled.div`
 
 const StyledSwitch = styled.section`
   grid-area: switch;
-  background-color: #53A548;
+  background-color: #53a548;
   /* min-height: 100%; */
 `;
 
 function App() {
   const [navVisible, setNavVisible] = useState(false);
   const [user, setUser] = useState(null);
-  const [basket, setBasket] = useState([])
+  const [basket, setBasket] = useState([]);
+  const [selectedItem, setSelectedItem] = useState({});
+  const [basketPrice, setBasketPrice] = useState(0);
 
-  useEffect(()=> {
+  useEffect(() => {
     axios({
       method: "get",
-      url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`
+      url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`,
     }).then((res) => {
-      console.log(res, 'basket', user)
-      setBasket(res.data.items)
-    })
-  }, [user])
-
+      console.log(res, "basket", user);
+      setBasket(res.data.items);
+    });
+  }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, basket, setBasket }}>
+    <UserContext.Provider
+      value={{ user, setUser, basket, setBasket, setBasketPrice, basketPrice }}
+    >
       <AppLayout>
         <BrowserRouter>
           <Header className="header" />
@@ -63,13 +67,16 @@ function App() {
                 <Categories />
               </Route>
               <Route exact path="/items/:searchTerm">
-                <QueriedItems />
+                <QueriedItems setSelectedItem={setSelectedItem} />
               </Route>
               <Route exact path="/account">
-                <Account />
+                <Account setBasket={setBasket} />
               </Route>
               <Route exact path="/basket">
                 <Basket />
+              </Route>
+              <Route exact path="/item/:id">
+                <ItemView selectedItem={selectedItem} setBasket={setBasket} />
               </Route>
             </Switch>
           </StyledSwitch>

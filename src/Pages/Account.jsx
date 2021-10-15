@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Constants/UserContext";
 import axios from "axios";
+import { getBasket, getBasketPrice } from "../utils/getBasket";
 
 const Account = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setBasket, setBasketPrice, basket } =
+    useContext(UserContext);
   const [userList, setUserList] = useState([]);
   const [selectedUser, setSelectedUser] = useState(user);
   const [inputUsername, setInputUsername] = useState("");
@@ -46,10 +48,17 @@ const Account = () => {
       <form
         id="log-in-form"
         action=""
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           console.log(e, "select button");
-          setUser(selectedUser);
+          await setUser(selectedUser);
+          await setBasket(() => {
+            return getBasket(selectedUser.id);
+          });
+          await setBasketPrice(() => {
+            console.log(basket, "in the account");
+            return getBasketPrice(basket);
+          });
         }}
       >
         <select
@@ -59,14 +68,14 @@ const Account = () => {
             setSelectedUser(e.target.value);
           }}
         >
-          <option value="" disabled selected>Select User</option>
+          <option value="" disabled selected>
+            Select User
+          </option>
           {userList.map((user) => {
             return (
-             
               <option key={user.username + Math.random()} value={user.username}>
                 {user.username}
               </option>
-            
             );
           })}
         </select>
