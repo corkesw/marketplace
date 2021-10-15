@@ -9,9 +9,9 @@ const Basket = () => {
 
   return (
     <>
-      {console.log(basket)}
+      {console.log(basket, 'in Basket')}
 
-      {basketPrice === 0 ? (
+      {basket.length === 0 ? (
         <p>No Items Found... yet</p>
       ) : (
         <section>
@@ -19,7 +19,7 @@ const Basket = () => {
             {basket.map((item) => {
               // setItemCount((itemCount) => itemCount + 1);
               return (
-                <li>
+                <li key={item.id}>
                   <img src={item.img_url} alt={item.item_name} width="120px" />
                   {item.item_name} £{item.price / 100}{" "}
                 </li>

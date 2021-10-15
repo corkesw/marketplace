@@ -5,7 +5,7 @@ import { UserContext } from "../Constants/UserContext";
 import { getBasket } from "../utils/getBasket";
 
 const ItemView = ({ selectedItem }) => {
-  const { user, setBasket } = useContext(UserContext);
+  const { user, setBasket, basket } = useContext(UserContext);
   console.log(selectedItem);
   const item = selectedItem;
   return (
@@ -27,11 +27,13 @@ const ItemView = ({ selectedItem }) => {
             url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`,
             data: { item_id: item.item_id },
           }).then((res) => {
-            console.log(res.data);
-            setBasket(() => {
-              return getBasket(user);
-            });
-          });
+              axios({
+               method: "get",
+               url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`,
+              }).then((res) => {
+                setBasket(res.data.items)
+              })
+            })
         }}
       >
         Add to basket

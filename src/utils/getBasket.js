@@ -7,7 +7,8 @@ export const getBasket = (user) => {
     method: "get",
     url: `https://nc-marketplace.herokuapp.com/api/users/${user}/basket`,
   }).then((res) => {
-    return res.data;
+    console.log(user, res.data.items, 'in the js func')
+    return res.data.items;
   });
 };
 

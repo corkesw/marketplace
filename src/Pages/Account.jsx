@@ -53,7 +53,8 @@ const Account = () => {
           console.log(e, "select button");
           await setUser(selectedUser);
           await setBasket(() => {
-            return getBasket(selectedUser.id);
+            console.log(selectedUser)
+            return getBasket(selectedUser);
           });
           await setBasketPrice(() => {
             console.log(basket, "in the account");
